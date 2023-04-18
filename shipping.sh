@@ -10,6 +10,9 @@ curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shippin
 echo -e "\e[36m>>>>>>>unzip app content>>>>>>>>>>>>>>>>>\e[0m"
 cd /app
 unzip /tmp/shipping.zip
+echo -e "\e[36m>>>>>>>Install maven dependencies>>>>>>>>>>>>>>>>>\e[0m"
+mvn clean package
+mv target/shipping-1.0.jar shipping.jar
 echo -e "\e[36m>>>>>>>Install mysql>>>>>>>>>>>>>>>>>\e[0m"
 yum install mysql -y
 echo -e "\e[36m>>>>>>>>>>Load schema>>>>>>>>>>>>>>\e[0m"
