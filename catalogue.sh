@@ -16,7 +16,7 @@ unzip /tmp/catalogue.zip
 echo -e "\e[36m>>>>>>>Install NOdeJs dependencies>>>>>>>>>>>>>>>>>\e[0m"
 npm install
 echo -e "\e[36m>>>>>>>Copy catalogue systemd file>>>>>>>>>>>>>>>>>\e[0m"
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
+cp C:\Users\Afzal Basha\OneDrive\Desktop\gitrepos\roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
 echo -e "\e[36m>>>>>>>start catalogue service>>>>>>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
