@@ -10,12 +10,12 @@ curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shippin
 echo -e "\e[36m>>>>>>>unzip app content>>>>>>>>>>>>>>>>>\e[0m"
 cd /app
 unzip /tmp/shipping.zip
-echo -e "\e[36m>>>>>>>setup systemd shipping service>>>>>>>>>>>>>>>>>\e[0m"
-cp /root/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[36m>>>>>>>Install mysql>>>>>>>>>>>>>>>>>\e[0m"
 yum install mysql -y
 echo -e "\e[36m>>>>>>>>>>Load schema>>>>>>>>>>>>>>\e[0m"
 mysql -h mysql-dev.afzalbasha.cloud> -uroot -pRoboShop@1 < /app/schema/shipping.sql
+echo -e "\e[36m>>>>>>>setup systemd shipping service>>>>>>>>>>>>>>>>>\e[0m"
+cp /root/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[36m>>>>>>>start shipping service>>>>>>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable shipping
