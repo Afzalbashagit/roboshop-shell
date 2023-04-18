@@ -3,7 +3,7 @@ Description = Cart Service
 [Service]
 User=roboshop
 Environment=REDIS_HOST=redis-dev.afzalbasha.cloud
-Environment=CATALOGUE_HOST=catalogue.afzalbasha.cloud
+Environment=CATALOGUE_HOST=catalogue-dev.afzalbasha.cloud
 Environment=CATALOGUE_PORT=8080
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=cart
