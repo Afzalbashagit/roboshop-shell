@@ -26,4 +26,4 @@ cp /root/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m>>>>>>>Install mongodb client>>>>>>>>>>>>>>>>>\e[0m"
 yum install mongodb-org-shell -y
 echo -e "\e[36m>>>>>>>Load schema>>>>>>>>>>>>>>>>>\e[0m"
-mongo --host  mongodb.afzalbasha.cloud</app/schema/catalogue.js
+mongo --host  mongodb-dev.afzalbasha.cloud</app/schema/catalogue.js
