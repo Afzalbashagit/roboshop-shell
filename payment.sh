@@ -1,7 +1,8 @@
-echo -e "\e[36m>>>>>>>Install python>>>>>>>>>>>>>>>>>\e[0m"
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 yum install python36 gcc python3-devel -y
 echo -e "\e[36m>>>>>>>Add application user>>>>>>>>>>>>>>>>>\e[0m"
-useradd roboshop
+useradd {app_user}
 echo -e "\e[36m>>>>>>>create app directory>>>>>>>>>>>>>>>>>\e[0m"
 rm -rf /app
 mkdir /app
@@ -13,7 +14,7 @@ unzip /tmp/payment.zip
 echo -e "\e[36m>>>>>>>Install python dependencies>>>>>>>>>>>>>>>>>\e[0m"
 pip3.6 install -r requirements.txt
 echo -e "\e[36m>>>>>>>Add application user in rabbitmq>>>>>>>>>>>>>>>>>\e[0m"
-cp /root/roboshop-shell/payment.service /etc/systemd/system/payment.service
+cp $script_path/payment.service /etc/systemd/system/payment.service
 echo -e "\e[36m>>>>>>>start payment services>>>>>>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable payment

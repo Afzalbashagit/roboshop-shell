@@ -1,3 +1,5 @@
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 echo -e "\e[36m>>>>>>>Install erland repo>>>>>>>>>>>>>>>>>\e[0m"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 echo -e "\e[36m>>>>>>>Install rabbitmq repo>>>>>>>>>>>>>>>>>\e[0m"

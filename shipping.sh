@@ -1,7 +1,5 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
-echo $script_path
-exit
 echo -e "\e[36m>>>>>>>Install maven>>>>>>>>>>>>>>>>>\e[0m"
 yum install maven -y
 echo -e "\e[36m>>>>>>>add application user>>>>>>>>>>>>>>>>>\e[0m"
@@ -22,7 +20,7 @@ yum install mysql -y
 echo -e "\e[36m>>>>>>>>>>Load schema>>>>>>>>>>>>>>\e[0m"
 mysql -h mysql-dev.afzalbasha.cloud> -uroot -pRoboShop@1 < /app/schema/shipping.sql
 echo -e "\e[36m>>>>>>>setup systemd shipping service>>>>>>>>>>>>>>>>>\e[0m"
-cp /root/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
+cp $script_path/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[36m>>>>>>>start shipping service>>>>>>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable shipping
