@@ -1,6 +1,4 @@
-script_path=$(dirname $0)
-source ${script_path}/common.sh
-echo $script_path
+pwd
 exit
 echo -e "\e[36m>>>>>>>Install maven>>>>>>>>>>>>>>>>>\e[0m"
 yum install maven -y
