@@ -1,6 +1,6 @@
 source common.sh
 dirname $0
-echo {app_user}
+echo ${app_user}
 exit
 echo -e "\e[36m>>>>>>>Install maven>>>>>>>>>>>>>>>>>\e[0m"
 yum install maven -y
