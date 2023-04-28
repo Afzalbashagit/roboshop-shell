@@ -1,7 +1,5 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
-echo ${app_user}
-exit
 echo -e "\e[36m>>>>>>>Install maven>>>>>>>>>>>>>>>>>\e[0m"
 yum install maven -y
 echo -e "\e[36m>>>>>>>add application user>>>>>>>>>>>>>>>>>\e[0m"
