@@ -1,7 +1,6 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
-echo -e "\e[36m>>>>>>>Configuring nodejs repos>>>>>>>>>>>>>>>>>\e[0m"
 component=catalogue
 func_nodejs
 echo -e "\e[36m>>>>>>>Copy mongodb repo>>>>>>>>>>>>>>>>>\e[0m"
