@@ -2,32 +2,24 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 app_user=roboshop
 
-
-func_printhead(){
-
-    echo -e "\e[36m>>>>>>>$1>>>>>>>>>>>>>>>>>\e[0m
-
-}
-
 func_nodejs(){
-
- func_printhead "Installing NOdeJs"
+    echo -e "\e[36m>>>>>>>Installing NOdeJs>>>>>>>>>>>>>>>>>\e[0m"
     yum install nodejs -y
-func_printhead "Add Application User"
+    echo -e "\e[36m>>>>>>>Add Application User>>>>>>>>>>>>>>>>>\e[0m"
     useradd {app_user}
-  func_printhead "Creating app directory"
+    echo -e "\e[36m>>>>>>>Creating app directory>>>>>>>>>>>>>>>>>\e[0m"
     rm -rf /app
     mkdir /app
-   func_printhead "Download app content"
+    echo -e "\e[36m>>>>>>>Download app content>>>>>>>>>>>>>>>>>\e[0m"
     curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
     cd /app
-   func_printhead "unzip app content"
+    echo -e "\e[36m>>>>>>>unzip app content>>>>>>>>>>>>>>>>>\e[0m"
     unzip /tmp/${component}.zip
- func_printhead "Install NOdeJs dependencies"
+    echo -e "\e[36m>>>>>>>Install NOdeJs dependencies>>>>>>>>>>>>>>>>>\e[0m"
     npm install
-   func_printhead "Copy cart systemd file"
+    echo -e "\e[36m>>>>>>>Copy cart systemd file>>>>>>>>>>>>>>>>>\e[0m"
     cp $script_path/${component}.service /etc/systemd/system/${component}.service
-   func_printhead "start cart service"
+    echo -e "\e[36m>>>>>>>start cart service>>>>>>>>>>>>>>>>>\e[0m"
     systemctl daemon-reload
     systemctl enable ${component}
     systemctl restart ${component}
