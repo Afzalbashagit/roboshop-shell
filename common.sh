@@ -13,9 +13,9 @@ func_nodejs(){
 
  func_printhead "Installing NOdeJs"
     yum install nodejs -y
-func_printhead " Add Application User"
+func_printhead "Add Application User"
     useradd {app_user}
-  func_printhead " Creating app directory"
+  func_printhead "Creating app directory"
     rm -rf /app
     mkdir /app
    func_printhead "Download app content"
