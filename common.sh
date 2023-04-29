@@ -5,8 +5,18 @@ app_user=roboshop
 
 func_print(){
 
- echo -e "\e[36m>>>>>>>$1>>>>>>>>>>>>>>>>>\e[0m"
+ echo -e "\e[36m>>>>>>>$1
 
+
+}
+
+func_schema(){
+  func_print "Copy mongodb repo"
+  cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo
+  func_print "Install mongodb client"
+  yum install mongodb-org-shell -y
+  func_print "Load schema"
+  mongo --host  mongodb-dev.afzalbasha.cloud</app/schema/catalogue.js
 
 }
 
@@ -32,4 +42,5 @@ func_nodejs(){
     systemctl daemon-reload
     systemctl enable ${component}
     systemctl restart ${component}
+    func_schema
 }
