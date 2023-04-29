@@ -4,10 +4,13 @@ app_user=roboshop
 
 
 func_printhead(){
+
     echo -e "\e[36m>>>>>>>$1>>>>>>>>>>>>>>>>>\e[0m
+
 }
 
 func_nodejs(){
+
  func_printhead "Installing NOdeJs"
     yum install nodejs -y
 func_printhead " Add Application User"
