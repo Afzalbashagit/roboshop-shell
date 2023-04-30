@@ -1,25 +1,25 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 app_user=roboshop
-
+log_file=/tmp/robshop.log
 
 func_print(){
 
  echo -e "\e[36m>>>>>>>$1>>>>>>>>>>>>>>>>>\e[0m"
-
+ echo -e "\e[36m>>>>>>>$1>>>>>>>>>>>>>>>>>\e[0m"&>>log_file
 
 }
 
 func_schema(){
   if [ "$schema_setup" == "mongo" ];then
   func_print "Copy mongodb repo"
-  cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo
+  cp $script_path/mongo.repo /etc/yum.repos.d/mongo.repo&>>log_file
   func_stat_check $?
   func_print "Install mongodb client"
-  yum install mongodb-org-shell -y
+  yum install mongodb-org-shell -y>>log_file
   func_stat_check $?
   func_print "Load schema"
-  mongo --host  mongodb-dev.afzalbasha.cloud</app/schema/${component}.js
+  mongo --host  mongodb-dev.afzalbasha.cloud</app/schema/${component}.js>>log_file
   func_stat_check $?
  fi
   if [ "$schema_setup" == "mysql" ];then
@@ -27,7 +27,7 @@ func_schema(){
     yum install mysql -y
     func_stat_check $?
     func_print "Load schema"
-    mysql -h mysql-dev.afzalbasha.cloud> -uroot -p${mysql_root_password} < /app/schema/${component}.sql
+    mysql -h mysql-dev.afzalbasha.cloud> -uroot -p${mysql_root_password} < /app/schema/${component}.sql>>log_file
     func_stat_check $?
   fi
 
@@ -36,29 +36,29 @@ func_schema(){
 
 func_app_prereq(){
    func_print "add application user"
-    useradd {app_user}&>/tmp/robshop.log
+    useradd {app_user}&>>log_file
     func_stat_check $?
     func_print "create app directory"
     rm -rf /app
     mkdir /app
     func_stat_check $?
     func_print "Download app content"
-    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip>>log_file
     func_stat_check $?
     func_print "unzip app content"
     cd /app
-    unzip /tmp/${component}.zip
+    unzip /tmp/${component}.zip>>log_file
     func_stat_check $?
 }
 func_systemd_service()
 {
     func_print "setup systemd  service"
-    cp $script_path/${component}.service /etc/systemd/system/${component}.service
+    cp $script_path/${component}.service /etc/systemd/system/${component}.service>>log_file
     func_stat_check $?
     func_print "start systemd service"
     systemctl daemon-reload
-    systemctl enable ${component}
-    systemctl restart ${component}
+    systemctl enable ${component}>>log_file
+    systemctl restart ${component}>>log_file
     func_stat_check $?
 }
 func_stat_check(){
@@ -72,7 +72,7 @@ func_stat_check(){
 }
 func_nodejs(){
    func_print "Installing NOdeJs"
-    yum install nodejs -y >/tmp/robshop.log
+    yum install nodejs -y >>log_file
    func_stat_check $?
    func_app_prereq
    func_print "Install NOdeJs dependencies"
@@ -86,12 +86,12 @@ func_nodejs(){
 
 func_java(){
    func_print "Install maven"
-  yum install maven -y
+  yum install maven -y>>log_file
   func_stat_check $?
  func_app_prereq
   func_print "Install maven dependencies"
   mvn clean package
-  mv target/${component}-1.0.jar ${component}.jar
+  mv target/${component}-1.0.jar ${component}.jar>>log_file
  func_stat_check $?
  func_schema
  func_systemd_service
