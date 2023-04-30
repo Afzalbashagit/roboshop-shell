@@ -21,5 +21,5 @@ systemctl enable mysqld &>>log_file
 systemctl restart mysqld &>>log_file
 func_stat_check $?
 func_print "Reset mysql password"
-mysql_secure_installation --set-root-pass {mysql_root_password} &>>log_file
+mysql_secure_installation --set-root-pass $mysql_root_password &>>log_file
 func_stat_check $?
