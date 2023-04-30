@@ -7,14 +7,19 @@ then
   echo mysql root password missing
   exit
 fi
-echo -e "\e[36m>>>>>>>Disable mysql default version>>>>>>>>>>>>>>>>>\e[0m"
-dnf module disable mysql -y
-echo -e "\e[36m>>>>>>>Copy mysql repo>>>>>>>>>>>>>>>>>\e[0m"
-cp $script_path/mysql.repo /etc/yum.repos.d/mysql.repo
-echo -e "\e[36m>>>>>>>Install mysql>>>>>>>>>>>>>>>>>\e[0m"
-yum install mysql-community-server -y
-echo -e "\e[36m>>>>>>>Start mysql>>>>>>>>>>>>>>>>>\e[0m"
-systemctl enable mysqld
-systemctl restart mysqld
-echo -e "\e[36m>>>>>>>Reset mysql password>>>>>>>>>>>>>>>>>\e[0m"
-mysql_secure_installation --set-root-pass {mysql_root_password}
+func_print "Disable mysql default version"
+dnf module disable mysql -y &>>log_file
+func_stat_check $?
+func_print "Copy mysql repo"
+cp $script_path/mysql.repo /etc/yum.repos.d/mysql.repo &>>log_file
+func_stat_check $?
+func_print "Install mysql"
+yum install mysql-community-server -y &>>log_file
+func_stat_check $?
+func_print "Start mysql"
+systemctl enable mysqld &>>log_file
+systemctl restart mysqld &>>log_file
+func_stat_check $?
+func_print "Reset mysql password"
+mysql_secure_installation --set-root-pass {mysql_root_password} &>>log_file
+func_stat_check $?

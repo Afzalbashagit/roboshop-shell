@@ -8,16 +8,21 @@ then
   echo Input rabbitmq password is missing
   exit
 fi
-echo -e "\e[36m>>>>>>>Install erland repo>>>>>>>>>>>>>>>>>\e[0m"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
-echo -e "\e[36m>>>>>>>Install rabbitmq repo>>>>>>>>>>>>>>>>>\e[0m"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
-echo -e "\e[36m>>>>>>>Install erlang and rabbitmq>>>>>>>>>>>>>>>>>\e[0m"
-yum install rabbitmq-server -y
-yum install erlang -y
-echo -e "\e[36m>>>>>>>start rabbitmq services>>>>>>>>>>>>>>>>>\e[0m"
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
-echo -e "\e[36m>>>>>>>Add application user in rabbitmq>>>>>>>>>>>>>>>>>\e[0m"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+func_print "Install erland repo"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>log_file
+func_stat_check $?
+func_print "Install rabbitmq repo"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>log_file
+func_stat_check $?
+func_print "Install erlang and rabbitmq"
+yum install rabbitmq-server -y &>>log_file
+yum install erlang -y &>>log_file
+func_stat_check $?
+func_print "start rabbitmq services"
+systemctl enable rabbitmq-server &>>log_file
+systemctl start rabbitmq-server &>>log_file
+func_stat_check $?
+func_print "Add application user in rabbitmq"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>log_file
+func_stat_check $?
