@@ -27,7 +27,7 @@ func_schema(){
     yum install mysql -y &>>log_file
     func_stat_check $?
     func_print "Load schema"
-    mysql -h mysql-dev.afzalbasha.cloud -uroot -p${mysql_root_password} < /app/schema/shipping.sql &>>$log_file
+    mysql -h mysql-dev.afzalbasha.cloud -uroot -p${mysql_root_password} < /app/schema/${component}.sql &>>$log_file
     func_stat_check $?
   fi
 
