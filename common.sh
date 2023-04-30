@@ -54,24 +54,11 @@ func_systemd_service()
 func_nodejs(){
    func_print "Installing NOdeJs"
     yum install nodejs -y
-   func_print "Add Application User"
-    useradd {app_user}
-   func_print "Creating app directory"
-    rm -rf /app
-    mkdir /app
-   func_print "Download app content"
-    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
-    cd /app
-  func_print "unzip app content"
-    unzip /tmp/${component}.zip
+   func_app_prereq
    func_print "Install NOdeJs dependencies"
     npm install
-   func_print "Copy cart systemd file"
-    cp $script_path/${component}.service /etc/systemd/system/${component}.service
-   func_print "start cart service"
-    systemctl daemon-reload
-    systemctl enable ${component}
-    systemctl restart ${component}
+
+   func_systemd_service
 
     func_schema
 }
@@ -79,6 +66,12 @@ func_nodejs(){
 func_java(){
    func_print "Install maven"
   yum install maven -y
+  if [ $? -eq 0 ]; then
+    echo  echo -e "\e[36m>>>>>>>Succes<<<<<<<\e[0m"
+  else
+    echo  echo -e "\e[36m>>>>>>>Failure<<<<<<<\e[0m"
+    exit 1
+  fi
  func_app_prereq
   func_print "Install maven dependencies"
   mvn clean package
