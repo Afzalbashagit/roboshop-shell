@@ -71,7 +71,7 @@ func_stat_check(){
 }
 func_nodejs(){
    func_print "Installing NOdeJs"
-    yum install nodejs -y
+    yum install nodejs -y >/tmp/robshop.log
    func_stat_check $?
    func_app_prereq
    func_print "Install NOdeJs dependencies"
