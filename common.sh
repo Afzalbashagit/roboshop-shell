@@ -36,7 +36,7 @@ func_schema(){
 
 func_app_prereq(){
    func_print "add application user"
-    useradd {app_user}>/tmp/robshop.log
+    useradd {app_user}&>/tmp/robshop.log
     func_stat_check $?
     func_print "create app directory"
     rm -rf /app
