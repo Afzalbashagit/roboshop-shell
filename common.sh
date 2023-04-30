@@ -67,9 +67,9 @@ func_java(){
    func_print "Install maven"
   yum install maven -y
   if [ $? -eq 0 ]; then
-    echo  echo -e "\e[36m>>>>>>>Succes<<<<<<<\e[0m"
+    echo -e "\e[36m>>>>>>>Success<<<<<<<\e[0m"
   else
-    echo  echo -e "\e[36m>>>>>>>Failure<<<<<<<\e[0m"
+     echo -e "\e[36m>>>>>>>Failure<<<<<<<\e[0m"
     exit 1
   fi
  func_app_prereq
