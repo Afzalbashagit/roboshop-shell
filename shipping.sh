@@ -9,7 +9,7 @@ then
   exit
 fi
 
-component=java
+component=shipping
 
 schema_setup=mysql
 func_java
