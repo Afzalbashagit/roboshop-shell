@@ -70,7 +70,7 @@ func_java(){
     echo -e "\e[36m>>>>>>>Success<<<<<<<\e[0m"
   else
      echo -e "\e[36m>>>>>>>Failure<<<<<<<\e[0m"
-    exit 1
+     exit 1
   fi
  func_app_prereq
   func_print "Install maven dependencies"
