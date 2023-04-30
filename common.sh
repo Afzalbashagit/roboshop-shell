@@ -1,7 +1,7 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 app_user=roboshop
-log_file=/tmp/robshop.log
+log_file=/tmp/roboshop.log
 
 func_print(){
 
@@ -66,7 +66,7 @@ func_stat_check(){
           echo -e "\e[32mSuccess\e[0m"
         else
            echo -e "\e[31mFailure\e[0m"
-            echo -e "\e[32mRefer the /tmp/robshop.log for more information\e[0m"
+            echo -e "\e[32mRefer the /tmp/roboshop.log for more information\e[0m"
            exit 1
         fi
 }
