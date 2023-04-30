@@ -36,7 +36,7 @@ func_schema(){
 
 func_app_prereq(){
    func_print "add application user"
-    useradd {app_user}
+    useradd {app_user}>/tmp/robshop.log
     func_stat_check $?
     func_print "create app directory"
     rm -rf /app
@@ -66,6 +66,7 @@ func_stat_check(){
           echo -e "\e[32mSuccess\e[0m"
         else
            echo -e "\e[31mFailure\e[0m"
+            echo -e "\e[32mRefer the /tmp/roboshop.log for more information\e[0m"
            exit 1
         fi
 }
