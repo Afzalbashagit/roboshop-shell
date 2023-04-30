@@ -103,11 +103,14 @@ func_python()
 {
   func_print "Install python 3.6"
   yum install python36 gcc python3-devel -y &>>log_file
+  func_stat_check $?
   func_app_prereq
   func_print "Install python dependencies"
   pip3.6 install -r requirements.txt &>>log_file
+  func_stat_check $?
   func_print "Updating password in payment service"
   sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" $script_path/payment.service &>>log_file
+  func_stat_check $?
   func_systemd_service
 }
 

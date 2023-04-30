@@ -7,5 +7,5 @@ then
   echo rabbitmq appuser password missing
   exit
 fi
-
+component=payment
 func_python
